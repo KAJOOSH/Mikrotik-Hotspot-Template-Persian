@@ -1,4 +1,5 @@
 <h1 align="center">قالب هات اسپات میکروتیک (فارسی)</h1>
+<h3 align="center">به همراه اسکریپت پیامک</h3>
 <h3 align="center">Mikrotik Hotspot Template Persian</h3>
 
 
