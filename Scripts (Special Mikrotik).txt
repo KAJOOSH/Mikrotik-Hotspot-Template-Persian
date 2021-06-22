@@ -1,0 +1,122 @@
+﻿:local MBtotaldownload
+:local MBtotalupload
+:local logcontent
+
+:local TOTALdownload 0
+:local TOTALupload 0
+:local TOTALSUMD 0
+:local TOTALSUMU 0
+# -------------------------------
+:local dividend 
+:local divisor 1048576
+:local decimalplaces 2
+
+:local quotient 0
+:local remainder 0
+:local result 0
+:local decimal 0
+# -------------------------------
+:local Qdividend 
+:local Qdivisor 1048576
+:local Qdecimalplaces 2
+
+:local Qquotient 0
+:local Qremainder 0
+:local Qresult 0
+:local Qdecimal 0
+# -------------------------------
+:local Tdividend 
+:local Tdivisor 1048576
+:local Tdecimalplaces 2
+
+:local Tquotient 0
+:local Tremainder 0
+:local Tresult 0
+:local Tdecimal 0
+# -------------------------------
+
+:foreach i in=[/tool user-manager user find  username=$user] do={
+:local Qusername [/tool user-manager user get $i username];
+:local Qdownload [/tool user-manager user get $i download-used];
+:local Qupload [/tool user-manager user get $i upload-used];
+:local Qphone [/tool user-manager user get $i phone];
+:local Qfiname [/tool user-manager user get $i first-name];
+:local Qlname [/tool user-manager user get $i last-name];
+:local Quptime [/tool user-manager user get $i uptime-used];
+
+# -------------------------------
+:foreach ii in=[/tool user-manager session find  user=$Qusername] do={
+
+:set TOTALdownload [/tool user-manager session get $ii download];
+:set TOTALupload [/tool user-manager session get $ii upload];
+
+:set TOTALSUMD ($TOTALSUMD+$TOTALdownload) ;
+:set TOTALSUMU ($TOTALSUMU+$TOTALupload) ;
+
+  }
+# -------------------------------
+  
+:set dividend ($Qdownload)
+:set Qdividend ($Qupload)
+:set Tdividend ($TOTALSUMD+$TOTALSUMU)
+
+# -------------------------------
+:set quotient ($dividend / $divisor)
+:set remainder ($dividend - ($divisor * $quotient))
+
+:if ($remainder > 0) do={:set dividend ($Qdownload)
+  :local tmpremainder [:tonum ($remainder . "0")]
+
+  :for x from=1 to=$decimalplaces do={
+    :local tmpdecimal [:tonum ($tmpremainder / $divisor)]
+    :set decimal [:tonum ($decimal . $tmpdecimal)]
+    :set tmpremainder [:tonum (($tmpremainder - ($tmpdecimal * $divisor)) . "0")]
+  }
+  :set result ($quotient . "." . $decimal)
+} else={
+  :set result $quotient
+}
+# -------------------------------
+:set Qquotient ($Qdividend / $Qdivisor)
+:set Qremainder ($Qdividend - ($Qdivisor * $Qquotient))
+
+:if ($Qremainder > 0) do={:set Qdividend ($Qupload)
+  :local tmpremainder [:tonum ($Qremainder . "0")]
+
+  :for x from=1 to=$Qdecimalplaces do={
+    :local tmpdecimal [:tonum ($tmpremainder / $Qdivisor)]
+    :set Qdecimal  [:tonum ($Qdecimal  . $tmpdecimal)]
+    :set tmpremainder [:tonum (($tmpremainder - ($tmpdecimal * $Qdivisor)) . "0")]
+  }
+  :set Qresult ($Qquotient . "." . $Qdecimal )
+} else={
+  :set Qresult $Qquotient
+}
+# -------------------------------
+:set Tquotient ($Tdividend / $Tdivisor)
+:set Tremainder ($Tdividend - ($Tdivisor * $Tquotient))
+
+:if ($Tremainder > 0) do={:set Tdividend ($TOTALSUMD+$TOTALSUMU)
+  :local tmpremainder [:tonum ($Tremainder . "0")]
+
+  :for x from=1 to=$Tdecimalplaces do={
+    :local tmpdecimal [:tonum ($tmpremainder / $Tdivisor)]
+    :set Tdecimal  [:tonum ($Tdecimal  . $tmpdecimal)]
+    :set tmpremainder [:tonum (($tmpremainder - ($tmpdecimal * $Tdivisor)) . "0")]
+  }
+  :set Tresult ($Tquotient . "." . $Tdecimal )
+} else={
+  :set Tresult $Tquotient
+}
+
+
+:set logcontent ("اطلاعات مصرف اينترنت\r\nکاربر: $user\r\nدانلود: $result\r\nآپلود: $Qresult \r\nمدت اتصال: $Quptime\r\nکل ترافيک: $Tresult")
+:log warning "$logcontent "
+
+/tool fetch mode=https keep-result=no url="http://localhost:8080/Infrastructure/SendSMS.php?Zuser=$user&Zdownload=$result&Zupload=$Qresult&Zphone=$Qphone&Zuptime=$Quptime&Ztotal=$Tresult"
+
+#send email
+/tool e-mail send to="info@name.com" subject=([/system identity get name] . " - HotSpot Log For User: $user " ) body=$logcontent
+
+
+}
