@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <link rel="icon" href="Infrastructure/img/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="Infrastructure/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="Infrastructure/css/floating-labels.css" />
+
+    <title>internet hotspot > logout</title>
+    <meta name="description" content="internet hotspot > logout" />
+    <style>
+        .card-header {
+            padding: .05rem 1.25rem;
+        }
+    </style>
+</head>
+
+<body>
+    <script language="JavaScript">
+        <!--
+        function openLogin() {
+            if (window.name != 'hotspot_logout') return true;
+            open('$(link-login)', '_blank', '');
+            window.close();
+            return false;
+        }
+        //-->
+    </script>
+
+    <div class="form-signin">
+
+        <div class="alert alert-warning" role="alert" align="right" style="font-size:14px;">ارتباط شما قطع شد !</div>
+
+        <div class="card">
+            <div class="card-header" align="center" style="background-color: #0288D1; color: #ecf0f1; "></div>
+            <div class="card-body">
+
+                <table class="table table-striped" style="font-size:12px;width:100%;">
+                    <tr>
+                        <td width="50%" align="right">نام کاربری</td>
+                        <td dir="ltr" align="right" width="50%">$(username)</td>
+                    </tr>
+                    <tr>
+                        <td align="right">نشانی IP</td>
+                        <td dir="ltr" align="right">$(ip)</td>
+                    </tr>
+                    <tr>
+                        <td align="right">نشانی MAC</td>
+                        <td dir="ltr" align="right">$(mac)</td>
+                    </tr>
+                    <tr>
+                        <td align="right">مدت اتصال</td>
+                        <td dir="ltr" align="right">$(uptime)</td>
+                    </tr>
+                    <div style="display:none;">$(if session-time-left)</div>
+                    <tr>
+                        <td align="right">مدت باقی مانده</td>
+                        <td dir="ltr" align="right">$(session-time-left)</td>
+                    </tr>
+                    <div style="display:none;">$(endif)</div>
+                    <tr>
+                        <td align="right">آپلود / دانلود (بایت)</td>
+                        <td dir="ltr" align="right">$(bytes-out-nice) / $(bytes-in-nice)</td>
+                    </tr>
+                </table>
+                <form action="$(link-login)" name="login" onSubmit="return openLogin()">
+                    <button class="btn btn-primary" type="submit" style="font-size:14px;">ورود مجدد</button>
+                </form>
+
+
+
+            </div>
+        </div>
+        <br>
+        <p class="mt-1 mb-5 text-muted text-center">KAJOOSH.IR &copy;</p>
+    </div>
+    <script src="Infrastructure/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="Infrastructure/js/popper.min.js"></script>
+    <script src="Infrastructure/js/bootstrap.min.js"></script>
+</body>
+
+</html>

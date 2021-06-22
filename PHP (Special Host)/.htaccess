@@ -1,0 +1,123 @@
+#-------------------------i---------------------------------------------
+
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+#----------------------------------------------------------------------
+
+#xss blocage
+
+#----------------------------------------------------------------------
+
+RewriteCond %{REQUEST_METHOD} (GET|POST) [NC]
+
+#----------------------------------------------------------------------
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(h|%68|%48)(t|%74|%54)(t|%74|%54)(p|%70|%50)(s|%73|%53)(%3A|:)(/|%2F){2}(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(h|%68|%48)(t|%74|%54)(t|%74|%54)(p|%70|%50)(s|%73|%53)%3a(%3A|:)(/|%2F){2}(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(h|%68|%48)(t|%74|%54)(t|%74|%54)(p|%70|%50)(%3A|:)(/|%2F){2}(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(h|%68|%48)(t|%74|%54)(t|%74|%54)(p|%70|%50)%3a(%3A|:)(/|%2F){2}(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(f|%66|%46)(t|%74|%54)(p|%70|%50)(%3A|:)(/|%2F){2}(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(h|%68|%48)(t|%74|%54)%20(t|%74|%54)(p|%70|%50)(%3A|:)(/|%2F){2}(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(h|%68|%48)(t|%74|%54)(t|%74|%54)%20(p|%70|%50)(%3A|:)(/|%2F){2}(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(h|%68|%48)(t|%74|%54)(t|%74|%54)(p|%70|%50)%20(%3A|:)(/|%2F){2}(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=|%3A|%09)(.*)(h|%68|%48)%20(t|%74|%54)(t|%74|%54)(p|%70|%50)(%3A|:)(/|%2F){2}(.*)$ [NC]
+
+RewriteRule (.*) https://www.mokhtariha.ir/Hotspot/block.php   [L,QSA]
+
+#----------------------------------------------------------------------
+
+#Sql injection blocage
+
+#----------------------------------------------------------------------
+
+RewriteCond %{REQUEST_METHOD} (GET|POST) [NC]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%20(S|%73|%53)(E|%65|%45)(L|%6C|%4C)(E|%65|%45)(C|%63|%43)(T|%74|%54)%20|%20(I|%69|%49)(N|%6E|%4E)(S|%73|%53)(E|%65|%45)(R|%72|%52)(T|%74|%54)%20|%20(U|%75|%55)(P|%70|%50)(D|%64|%44)(A|%61|%41)(T|%74|%54)(E|%65|%45)%20|%20(R|%72|%52)(E|%65|%45)(P|%70|%50)(L|%6C|%4C)(A|%61|%41)(C|%63|%43)(E|%65|%45)%20|%20(W|%77|%57)(H|%68|%48)(E|%65|%45)(R|%72|%52)(E|%65|%45)%20|%20(L|%6C|%4C)(I|%69|%49)(K|%6B|%4B)(E|%65|%45)%20|%20(O|%6F|%4F)(R|%72|%52)%20)(.*)$ [NC]
+
+RewriteRule (.*) https://www.mokhtariha.ir/Hotspot/block.php   [L,QSA]
+
+#----------------------------------------------------------------------
+
+#Code injection blocage
+
+#----------------------------------------------------------------------
+
+RewriteCond %{REQUEST_METHOD} (GET|POST) [NC]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3C|<)/?(s|%73|%53)(c|%63|%43)(r|%72|%52)(i|%69|%49)(p|%70|%50)(t|%74|%54)(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(%3D|=)?(j|%6A|%4A)(a|%61|%41)(v|%76|%56)(a|%61|%31)(s|%73|%53)(c|%63|%43)(r|%72|%52)(i|%69|%49)(p|%70|%50)(t|%74|%54)(%3A|:)(.*)$ [NC,OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(d|%64|%44)(o|%6F|%4F)(c|%63|%43)(u|%75|%55)(m|%6D|%4D)(e|%65|%45)(n|%6E|%4E)(t|%74|%54)\.(l|%6C|%4C)(o|%6F|%4F)(c|%63|%43)(a|%61|%41)(t|%74|%54)(i|%69|%49)(o|%6F|%4F)(n|%6E|%4E)\.(h|%68|%48)(r|%72|%52)(e|%65|%45)(f|%66|%46)(.*)$ [OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(b|%62|%42)(a|%61|%41)(s|%73|%53)(e|%65|%45)(6|%36)(4|%34)(_|%5F)(e|%65|%45)(n|%6E|%4E)(c|%63|%43)(o|%6F|%4F)(d|%64|%44)(e|%65|%45)(.*)$ [OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(G|%67|%47)(L|%6C|%4C)(O|%6F|%4F)(B|%62|%42)(A|%61|%41)(L|%6C|%4C)(S|%73|%53)(=|[|%[0-9A-Z]{0,2})(.*)$ [OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(_|%5F)(R|%72|%52)(E|%65|%45)(Q|%71|%51)(U|%75|%55)(E|%65|%45)(S|%73|%53)(T|%74|%54)(=|[|%[0-9A-Z]{0,2})(.*)$ [OR]
+
+RewriteCond %{REQUEST_URI} ^(.*)(_|%5F)(v|%76|%56)(t|%74|%54)(i|%69|%49)(.*)$ [OR]
+
+RewriteCond %{REQUEST_URI} ^(.*)(M|%4D)(S|%53)(O|%4F)(f|%66)(f|%66)(i|%69)(c|%63)(e|%65)(.*)$ [OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(/|%2F)(e|%65)(t|%74)(c|%63)(/|%2F)(p|%70)(a|%61)(s|%73)(s|%73)(w|%77)(d|%64)(.*)$ [OR]
+
+RewriteCond %{REQUEST_URI} ^(.*)(S|%53)(h|%68)(e|%65)(l|%6C)(l|%6C)(A|%41)(d|%64)(r|%72)(e|%65)(s|%73)(i|%69).(T|%54)(X|%58)(T|%54)(.*)$ [OR]
+
+RewriteCond %{REQUEST_URI} ^(.*)\[(e|%65)(v|%76)(i|%69)(l|%6C)(_|%5F)(r|%72)(o|%6F)(o|%6F)(t|%74)\]?(.*)$ [OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)\.\./\.\./\.\./(.*)$ [OR]
+
+RewriteCond %{QUERY_STRING} ^(.*)(/|%2F)(p|%70)(r|%72)(o|%6F)(c|%63)(/|%2F)(s|%73)(e|%65)(l|%C)(f|%66)(/|%2F)(e|%65)(n|%6E)(v|%76)(i|%69)(r|%72)(o|%6F)(n|%6E)(.*)$
+
+RewriteRule (.*) https://www.mokhtariha.ir/Hotspot/block.php   [L,QSA]
+
+#----------------------------------------------------------------------
+
+#Bad bot and site copier blocage
+
+#----------------------------------------------------------------------
+
+RewriteCond %{HTTP_USER_AGENT} @nonymouse|ADSARobot|Advanced\ Email\ Extractor|ah-ha|aktuelles|almaden|amzn_assoc|Anarchie|Art-Online|AspiWeb|ASPSeek|ASSORT|ATHENS|Atomz|attach|attache|autoemailspider|BackWeb|Bandit|BatchFTP|bdfetch|big\.brother|BlackWidow|bmclient|Boston\ Project|Bot\ mailto:craftbot@yahoo\.com|BravoBrian\ SpiderEngine\ MarcoPolo|Buddy|Bullseye|bumblebee|capture|CherryPicker|ChinaClaw|CICC|clipping|Crescent\ Internet\ ToolPack|cURL|Custo|cyberalert|Deweb|diagem|Digger|Digimarc|DIIbot|DirectUpdate|DISCo|Drip|DSurf15a|DTS\.Agent|EasyDL|eCatch|echo\ extense|ecollector|efp@gmx\.net|EirGrabber|Email\ Extractor|EmailCollector|EmailSiphon|EmailWolf|Express\ WebPictures|ExtractorPro|EyeNetIE|fastlwspider|FavOrg|Favorites\ Sweeper|Fetch\ API\ Request|FEZhead|FileHound|FlashGet|FlickBot|fluffy|frontpage|GalaxyBot|Generic|Getleft|GetSmart|GetWeb!|GetWebPage|gigabaz|Girafabot|Go!Zilla|Go-Ahead-Got-It|GornKer|Grabber|GrabNet|Grafula|Green\ Research|Harvest|hhjhj@yahoo|hloader|HMView|HomePageSearch|HTTP\ agent|http\ generic|HTTPConnect|httpdown|HTTrack|IBM_Planetwide|Image\ Stripper|Image\ Sucker|imagefetch|IncyWincy|Indy\ Library|informant|Ingelin|InterGET|Internet\ Ninja|InternetLinkAgent|InternetSeer\.com|iOpus|IPiumBot\ laurion(dot)com|Iria|Irvine|Jakarta|JBH*Agent|JetCar|JustView|Kapere|KWebGet|Lachesis|larbin|LeechFTP|LexiBot|lftp|libwww|likse|Link*Sleuth|LINKS\ ARoMATIZED|LinkWalker|LWP|lwp-trivial|Mac\ Finder|Mag-Net|Magnet|Mass\ Downloader|MCspider|MemoWeb|Microsoft\ URL\ Control|MIDown\ tool|minibot\(NaverRobot\)|Missigua\ Locator|Mister\ PiX|MMMtoCrawl\/UrlDispatcherLLL|MSProxy|multithreaddb|nationaldirectory|Navroad|NearSite|Net\ Vampire|NetAnts|NetCarta|netcraft|netfactual|NetMechanic|netprospector|NetResearchServer|NetSpider|NetZIP|NEWT|nicerspro|NPBot|Octopus|Offline\ Explorer|Offline\ Navigator|OpaL|Openfind|OpenTextSiteCrawler|OutWit|PackRat|PageGrabber|Papa\ Foto|pavuk|pcBrowser|PersonaPilot|PingALink|Pockey|Program\ Shareware|psbot|PSurf|puf|Pump|PushSite|QRVA|QuepasaCreep|RealDownload|Reaper|Recorder|ReGet|replacer|RepoMonkey|Robozilla|Rover|RPT-HTTPClient|Rsync|SearchExpress|searchhippo|searchterms\.it|Second\ Street\ Research|Shai|sitecheck|SiteMapper|SiteSnagger|SlySearch|SmartDownload|snagger|SpaceBison|Spegla|SpiderBot|SqWorm|Star\ Downloader|Stripper|Sucker|SuperBot|SuperHTTP|Surfbot|SurfWalker|Szukacz|tAkeOut|tarspider|Teleport\ Pro|Telesoft|Templeton|traffixer|TrueRobot|TuringOS|TurnitinBot|TV33_Mercator|UIowaCrawler|URL_Spider_Pro|UtilMind|Vacuum|vagabondo|vayala|visibilitygap|vobsub|VoidEYE|vspider|w3mir|Web\ Data\ Extractor|Web\ Downloader|Web\ Image\ Collector|Web\ Sucker|web\.by\.mail|WebAuto|webbandit|Webclipping|webcollage|webcollector|WebCopier|webcraft@bea|WebDAV|webdevil|webdownloader|Webdup|WebEmailExtractor|WebFetch|WebGo\ IS|WebHook|Webinator|WebLeacher|WebMiner|WebMirror|webmole|WebReaper|WebSauger|WEBsaver|Website\ eXtractor|Website\ Quester|WebSnake|Webster|WebStripper|websucker|webvac|webwalk|webweasel|WebWhacker|WebZIP|Wget|whizbang|WhosTalking|Widow|WISEbot|WUMPUS|Wweb|WWWOFFLE|Wysigot|x-Tractor|Xaldon\ WebSpider|XGET|Zeus.*|^[^?]*\.ideography\.co\.uk|^[^?]*addresses\.com|^[^?]*iaea\.org [OR]
+
+RewriteCond %{HTTP_REFERER} ^XXX
+
+RewriteRule (.*) https://www.mokhtariha.ir/Hotspot/block.php   [L,QSA]
+
+#----------------------------------------------------------------------
+
+# Filter against shell attacks
+
+#----------------------------------------------------------------------
+
+RewriteCond %{REQUEST_URI} .*((php|my)?shell|remview.*|phpremoteview.*|sshphp.*|pcom|nstview.*|c99|r57|webadmin.*|phpget.*|phpwriter.*|fileditor.*|locus7.*|storm7.*)\.(p?s?x?htm?l?|txt|aspx?|cfml?|cgi|pl|php[3-9]{0,1}|jsp?|sql|xml) [NC,OR]
+
+RewriteCond %{REQUEST_METHOD} (GET|POST) [NC]
+
+RewriteCond %{QUERY_STRING} ^work_dir=.*$ [OR]
+
+RewriteCond %{QUERY_STRING} ^command=.*&output.*$ [OR]
+
+RewriteCond %{QUERY_STRING} ^nts_[a-z0-9_]{0,10}=.*$ [OR]
+
+RewriteCond %{QUERY_STRING} ^c=(t|setup|codes)$ [OR]
+
+RewriteCond %{QUERY_STRING} ^act=((about|cmd|selfremove|chbd|trojan|backc|massbrowsersploit|exploits|grablogins|upload.*)|((chmod|f)&f=.*))$ [OR]
+
+RewriteCond %{QUERY_STRING} ^act=(ls|search|fsbuff|encoder|tools|processes|ftpquickbrute|security|sql|eval|update|feedback|cmd|gofile|mkfile)&d=.*$ [OR]
+
+RewriteCond %{QUERY_STRING} ^&?c=(l?v?i?&d=|v&fnot=|setup&ref=|l&r=|d&d=|tree&d|t&d=|e&d=|i&d=|codes|md5crack).*$
+
+RewriteRule (.*) https://www.mokhtariha.ir/Hotspot/block.php   [L,QSA]
+
+</ifModule>

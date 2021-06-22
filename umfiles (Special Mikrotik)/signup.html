@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="rtl" >
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  	<link rel="icon" href="/umfiles/Infrastructure/img/favicon.ico" type="image/x-icon"/>
+    
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/umfiles/Infrastructure/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/umfiles/Infrastructure/css/floating-labels.css"/>
+
+
+  <title>User Signup</title>
+  <meta name="description" content="User Signup"/>
+
+</head>
+
+<script type="text/javascript" src="/umfiles/Infrastructure/js/general.js"></script>
+<style>
+    .card-header {
+        padding: .05rem 1.25rem;
+    }
+	
+</style>
+<body>
+
+	<div class="form-signin">
+	        <div class="text-center mb-2">
+            <img class="mb-2" src="/umfiles/Infrastructure/img/Register.svg" alt="" width="100" height="100"> </img>
+        </div>
+	<div class="card">
+	<div class="card-header" align="center" style="background-color: #0288D1; color: #ecf0f1; "></div>
+	<div class="card-body">
+	
+<form name="signup" action="" method="post"
+    onsubmit="return checkSignupForm()">
+  <input type="hidden" name="signup" value="start" />
+
+<div class="MarginBottom1">
+	<input class="form-control" id="sf_email" name="email"  type="email" placeholder="ایمیل" required autofocus />
+</div>
+<div class="MarginBottom1">
+	<input class="form-control" id="sf_phone" name="phone"   type="text" placeholder="تلفن" required autofocus />
+</div>
+<div class="MarginBottom1">
+	<input class="form-control" id="sf_fname" name="fname"    type="text" placeholder="نام" required autofocus />
+</div>
+
+<div class="MarginBottom1">
+	<input class="form-control" id="sf_lname" name="lname"    type="text" placeholder="نام خانوادگی" required autofocus />
+</div>
+<div class="MarginBottom1">
+	<input class="form-control" name="login" id="sf_user"    type="text" placeholder="نام کاربری" required autofocus />
+</div>
+<div class="MarginBottom1">
+	<input class="form-control" name="password" id="sf_pwd"    type="password" placeholder="رمز عبور" required autofocus />
+</div>
+<div class="MarginBottom1">
+	<input class="form-control" name="confirm_password" id="sf_cnf_pwd"   type="password" placeholder="رمز عبور مجدد" required autofocus />
+</div>
+
+<div align="right">
+$(profiles)
+$(methods)
+</div>
+<br>
+<button class="btn btn-primary" type="submit" name="btn_signup" id="btn_signup" style="font-size:14px;" >ثبت نام</button> 
+
+
+
+</form>
+
+</div>
+</div>
+	<br>
+	<div align="center">
+	 
+	$(error)
+	 
+	</div>
+	
+	</div>
+</div>
+<script language="JavaScript">
+<!--
+  if (document.signup && document.signup.user) document.signup.user.focus();
+
+  function checkSignupForm() {
+    if (!checkEmail("sf_email")) return false;
+    if (!checkMinLen("sf_user", "Login", 3)) return false;
+    if (!checkMinLen("sf_pwd", "Password", 5)) return false;
+    if (!checkAreEqual("sf_pwd", "sf_cnf_pwd", "Passwords differ")) return false;
+    return true;
+  } 
+
+  -->
+</script>
+
+    <script src="/umfiles/Infrastructure/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="/umfiles/Infrastructure/js/popper.min.js"></script>
+    <script src="/umfiles/Infrastructure/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

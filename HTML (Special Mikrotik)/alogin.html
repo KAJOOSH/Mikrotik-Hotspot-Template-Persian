@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+	<meta http-equiv="refresh" content="4; url=$(link-redirect)">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="expires" content="-1">
+	<link rel="icon" href="Infrastructure/img/favicon.ico" type="image/x-icon">
+	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+	<title>internet hotspot > redirect</title>
+	<meta name="description" content="internet hotspot > redirect">
+	<link rel="stylesheet" href="Infrastructure/css/bootstrap.min.css">
+	<link rel="stylesheet" href="Infrastructure/css/floating-labels.css">
+	<style>
+	.card-header {
+		padding: .05rem 1.25rem
+	}
+	</style>
+	<script>
+	function startClock() {
+		$(
+			if popup == 'true')
+		open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=290,height=200');
+		$(endif)
+		location.href = unescape('$(link-redirect-esc)');
+	}
+	</script>
+</head>
+
+<body onload="startClock()">
+	<div class="form-signin">
+		<div class="text-center mb-2"><img class="mb-2" src="Infrastructure/img/spinner.svg" alt="" width="72" height="72"></div>
+		<div class="card">
+			<div class="card-header" align="center" style="background-color:#0288D1;color:#ecf0f1"></div>
+			<div class="card-body">
+				<div align="center">وارد شده اید ، کمی صبر کنید ..
+					<br>
+					<div align="center" style="font-size:13px">اگر اتفاقی رخ نداد،<a href="$(link-redirect)">کلیک</a>کنید</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<p class="mt-1 mb-5 text-muted text-center">KAJOOSH.IR &copy;</p>
+	</div>
+	<script src="Infrastructure/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="Infrastructure/js/popper.min.js"></script>
+	<script src="Infrastructure/js/bootstrap.min.js"></script>
+</body>
+
+</html>

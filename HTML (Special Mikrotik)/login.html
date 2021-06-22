@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="expires" content="-1" />
+	<link rel="icon" href="Infrastructure/img/favicon.ico" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="Infrastructure/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="Infrastructure/css/floating-labels.css" />
+	<title>internet hotspot > login</title>
+	<meta name="description" content="internet hotspot > login" />
+	<style>
+	.card-header {
+		padding: .05rem 1.25rem;
+	}
+	</style>
+</head>
+
+<body>
+<script>
+function myFunction() {
+  var x = document.createElement("VAR");
+  var t = document.createTextNode("Some text..");
+  x.appendChild(t);
+  document.body.appendChild(x);
+}
+</script>
+
+
+	<div class="form-signin">
+		<div style="display:none;">$(if chap-id)</div>
+		<form name="sendin" action="$(link-login-only)" method="post">
+			<input type="hidden" name="username" />
+			<input type="hidden" name="password" />
+			<input type="hidden" name="dst" value="$(link-orig)" />
+			<input type="hidden" name="popup" value="true" /> </form>
+		<script type="text/javascript" src="Infrastructure/js/md5.js"></script>
+		<script type="text/javascript">
+		<!--
+		function doLogin() {
+			document.sendin.username.value = document.login.username.value;
+			document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+			document.sendin.submit();
+			return false;
+		}
+		//-->
+		</script>
+		<div style="display:none;">$(endif)</div>
+		<div class="text-center mb-2"> <img class="mb-2" src="Infrastructure/img/cloud-connect-laptop.svg" alt="" width="100" height="100"> </img>
+			<!--
+            <div align="center" class="alert alert-primary" role="alert" style="font-size:14px;">
+
+                <strong>به کلیه کاربران روزانه 75 مگابایت ترافیک تعلق می گیرد</strong>
+            </div>
+			-->
+		</div>
+		<div class="card">
+			<div class="card-header" align="center" style="background-color: #0288D1; color: #ecf0f1; "></div>
+			<div class="card-body">
+				<form class="form" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+					<input type="hidden" name="dst" value="$(link-orig)" />
+					<input type="hidden" name="popup" value="true" />
+					<div class="MarginBottom1">
+						<input class="form-control" name="username" type="text" placeholder="نام کاربری" required autofocus /> </div>
+					<div class="MarginBottom1">
+						<input class="form-control " name="password" placeholder="رمز عبور" type="password" required /> </div>
+					<div class="container">
+						<div class="row justify-content-end">
+							<div class="col-auto mx-0">
+								<div style="display:none;">$(if trial == 'yes')</div>
+								<button type="button" class="btn btn-success btn-block" onclick="location.href = '$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)'">ورود محدود</button>
+								<div style="display:none;">$(endif)</div>
+							</div>
+							<div class="col-0">
+								<button tabindex="0" class="btn btn-primary btn-block" type="submit">ورود</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="card-footer text-muted" align="right">
+				<p class="card-text mb-0"><small class="text-muted"><a href="http://localhost:8080/Forgot.php">رمز عبور را فراموش کرده اید؟</a></small></p>
+				<p class="card-text mb-0"><small class="text-muted"><a href="http://localhost:8080/Register.php">حساب کاربری ندارید؟ اکنون ایجاد کنید</a></small></p>
+			</div>
+		</div>
+		<div align="center">
+			<br>
+			<div style="display:none;">$(if error)</div>
+			<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size:14px;">
+				<!-- $(error) -->
+				<script type="text/javascript">
+				var error = "$(error)";
+				if(error == "simultaneous session limit reached") {
+					document.write("محدودیت تعداد اتصال همزمان به اتمام رسیده است");
+				} else if(error == "invalid password") {
+					document.write("نام کاربری و یا رمز عبور صحیح نمی باشد");
+				} else if(error == "no valid profile found") {
+					document.write("محدودیت حجمی شما به پایان رسیده است");
+				} else if(error.search("not found") != -1) {
+					document.write("مشخصات کاربری مورد نظر پیدا نشد");
+				} else if(error.search("transfer limit reached") != -1) {
+					document.write("محدودیت حجمی شما به پایان رسیده است");
+				} else if(error.search("download limit reached") != -1) {
+					document.write("محدودیت حجمی شما به پایان رسیده است");
+				} else if(error == "invalid username or password") {
+					document.write("نام کاربری و یا رمز عبور صحیح نمی باشد");
+				} else document.write("$(error)")
+				</script>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+			</div>
+			<div style="display:none;">$(endif)</div>
+		</div>
+		<p class="mt-1 mb-5 text-muted text-center">KAJOOSH.IR &copy;</p>
+	</div>
+	<script src="Infrastructure/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="Infrastructure/js/popper.min.js"></script>
+	<script src="Infrastructure/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	<!--
+	document.login.username.focus();
+	//-->
+	</script>
+</body>
+
+</html>

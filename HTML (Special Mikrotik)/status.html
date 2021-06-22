@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <div style="display:none;">$(if refresh-timeout)</div>
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)" />
+    <div style="display:none;">$(endif)</div>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <link rel="icon" href="Infrastructure/img/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="Infrastructure/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="Infrastructure/css/floating-labels.css" />
+
+    <title>internet hotspot > status</title>
+    <meta name="description" content="internet hotspot > status" />
+    <style>
+        .card-header {
+            padding: .05rem 1.25rem;
+        }
+    </style>
+    <script language="JavaScript">
+        <!--
+        $(
+            if advert - pending == 'yes')
+        var popup = '';
+
+        function focusAdvert() {
+            if (window.focus) popup.focus();
+        }
+
+        function openAdvert() {
+            popup = open('$(link-advert)', 'hotspot_advert', '');
+            setTimeout("focusAdvert()", 1000);
+        }
+        $(endif)
+
+        function openLogout() {
+            if (window.name != 'hotspot_status') return true;
+            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+            window.close();
+            return false;
+        }
+        //-->
+    </script>
+</head>
+
+<body $(if advert-pending=='yes' ) onLoad="openAdvert()" $(endif) />
+
+<div class="form-signin">
+
+
+    <div class="alert alert-primary" role="alert" align="right" style="font-size:14px;">خوش آمدید
+        <div style="display:none;">$(if login-by == 'trial')</div>
+        کاربر موفقت
+        <div style="display:none;">$(elif login-by != 'mac')</div>
+        $(username)
+        <div style="display:none;">$(endif)</div>
+        &#9829;
+    </div>
+    <div class="card">
+        <div class="card-header" align="center" style="background-color: #0288D1; color: #ecf0f1; "></div>
+        <div class="card-body">
+            <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+                <table class="table table-striped" style="font-size:12px;width:100%;">
+                    <tr>
+                        <td width="50%" align="right">نشانی IP</td>
+                        <td dir="ltr" align="right" width="50%">$(ip)</td>
+                    </tr>
+                    <tr>
+                        <td align="right">نشانی MAC</td>
+                        <td dir="ltr" align="right">$(mac)</td>
+                    </tr>
+                    <tr>
+                        <td align="right">آپلود / دانلود (بایت)</td>
+                        <td dir="ltr" align="right">$(bytes-out-nice) / $(bytes-in-nice)</td>
+                    </tr>
+                    <div style="display:none;">$(if session-time-left)</div>
+                    <tr>
+                        <td align="right">مدت اتصال / باقی مانده</td>
+                        <td dir="ltr" align="right">$(session-time-left) / $(uptime)</td>
+                    </tr>
+                    <div style="display:none;">$(else)</div>
+                    <tr>
+                        <td align="right">مدت اتصال</td>
+                        <td dir="ltr" align="right">$(uptime)</td>
+                    </tr>
+                    <div style="display:none;">$(endif)</div>
+                    <div style="display:none;">$(if blocked == 'yes')</div>
+                    <tr>
+                        <td align="right">وضعیت</td>
+                        <td align="right">
+                            <div style="color: #FF8080">
+                                <a href="$(link-advert)" target="hotspot_advert">متصل</a></div>
+                        </td>
+                    </tr>
+                    <div style="display:none;">$(elif refresh-timeout)</div>
+                    <tr>
+                        <td align="right">مدت به روز رسانی وضعیت</td>
+                        <td dir="ltr" align="right">$(refresh-timeout)</td>
+                    </tr>
+                    <div style="display:none;">$(endif)</div>
+
+                </table>
+                <div style="display:none;">$(if login-by-mac != 'yes')</div>
+                <button class="btn btn-secondary" style="font-size:14px;" onclick="document.location='http://$(hostname):8081/user?subs='; return false;">مدیریت کاربری</button>
+                <button class="btn btn-danger" type="submit" style="font-size:14px;">قطع ارتباط</button>
+                <div style="display:none;">$(endif)</div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <p class="mt-1 mb-5 text-muted text-center">KAJOOSH.IR &copy;</p>
+</div>
+
+
+<script src="Infrastructure/js/jquery-3.3.1.slim.min.js"></script>
+<script src="Infrastructure/js/popper.min.js"></script>
+<script src="Infrastructure/js/bootstrap.min.js"></script>
+</body>
+
+</html>
